@@ -1,14 +1,14 @@
 import sys
 from random import randint
-from PyQt5 import uic
+from ui import Ui_Form
 from PyQt5.QtGui import QPainter, QColor, QPen
 from PyQt5.QtWidgets import QWidget, QApplication
 
 
-class YellowRounds(QWidget):
+class YellowRounds(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.draw)
         self.make_draw = False
 
@@ -22,7 +22,7 @@ class YellowRounds(QWidget):
             w, h = [diam for i in range(2)]
             pen = QPen()
             pen.setWidth(5)
-            pen.setColor(QColor(255, 255, 0))
+            pen.setColor(QColor(*[randint(0, 255) for _ in range(3)]))
             qp.setPen(pen)
             qp.drawEllipse(x, y, w, h)
             qp.end()
